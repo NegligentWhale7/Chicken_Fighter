@@ -1302,6 +1302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602220984}
   - component: {fileID: 1602220983}
+  - component: {fileID: 1602220985}
   m_Layer: 0
   m_Name: _Managers
   m_TagString: Untagged
@@ -1337,6 +1338,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1602220985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602220982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c52040e0d356884a866f616474f7057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSwipeCancelled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwipe:
+    m_PersistentCalls:
+      m_Calls: []
+  _sensetivity: 10
+  _continuousDetection: 0
+  _swipeDetectionMode: 1
 --- !u!1 &1788228709
 GameObject:
   m_ObjectHideFlags: 0
@@ -4474,6 +4496,7 @@ GameObject:
   - component: {fileID: 2830551031737885433}
   - component: {fileID: 2830551031737885434}
   - component: {fileID: 2830551031737885435}
+  - component: {fileID: 2830551031737885436}
   m_Layer: 0
   m_Name: Toon Chicken
   m_TagString: Untagged
@@ -4644,6 +4667,19 @@ MonoBehaviour:
   runAnim: Run In Place
   walkAnim: Walk In Place
   gameManager: {fileID: 1602220983}
+--- !u!114 &2830551031737885436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829318179562874870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35309fd8839b51e42a869d73eb958214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swipeListener: {fileID: 1602220985}
 --- !u!4 &2830653523818562714
 Transform:
   m_ObjectHideFlags: 0
