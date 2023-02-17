@@ -7,13 +7,15 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private SwipeListener swipeListener;
     [SerializeField] private Transform upPosition, downPosition;
-    [SerializeField] private float speed;
+    [SerializeField] private float speed, xDistance, yDistance;
+    Rigidbody rb;
     private void OnEnable()
     {
         swipeListener.OnSwipe.AddListener(OnSwipe);
     }
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         this.transform.position = upPosition.position;
     }
     private void OnSwipe(string swipe)
@@ -33,6 +35,16 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = Vector3.Lerp(this.transform.position, upPosition.position, speed);
             //Debug.Log("Suben");
         }
+        if (swipe == "Right")
+        {
+            Debug.Log("Salta");
+            Jump();
+        }
+    }
+    private void Jump()
+    {
+        Vector3 parabola = new Vector3(xDistance, yDistance, 0f);
+        rb.AddForce(parabola, ForceMode.Impulse);
     }
     private void OnDisable()
     {

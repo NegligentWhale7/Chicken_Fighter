@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    private int setNumber, randomNumber;
+    [Header("Buildings")]
     [SerializeField] private List<GameObject> buildingSets = new List<GameObject>();
     [SerializeField] GameObject[] buildings;
     [SerializeField] private int numberOfSets, waitingTime;
     [SerializeField] private Transform buildingSpawnPosition;
-    private int setNumber, randomNumber;
-
     private static LevelGenerator instance;
     public static LevelGenerator Instance { get { return instance; } }
     private void Awake()
