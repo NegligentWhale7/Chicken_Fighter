@@ -9,7 +9,7 @@ public class PlayerAnimations : MonoBehaviour
     public enum PlayerStates { Running, Walk, Paused }
     public static PlayerStates playerStates;
 
-    [SerializeField] GameManager gameManager;
+    //[SerializeField] GameManager gameManager;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class PlayerAnimations : MonoBehaviour
         {
             case PlayerStates.Paused:
                 playerAnimator.Play(idleAnim);
-                if (!gameManager.IsPaused)
+                if (!GameManager.IsPaused)
                 {
                     Debug.Log("Pausa");
                     playerStates= PlayerStates.Walk;
@@ -33,7 +33,7 @@ public class PlayerAnimations : MonoBehaviour
                 break;
             case PlayerStates.Walk:
                 playerAnimator.Play(walkAnim);
-               if (gameManager.IsPaused)
+               if (GameManager.IsPaused)
                 {
                     Debug.Log("Jugando");
                     playerStates = PlayerStates.Paused;

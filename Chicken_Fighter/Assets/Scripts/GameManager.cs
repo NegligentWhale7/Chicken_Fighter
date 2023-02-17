@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool IsPaused = true;
-    private void Start()
-    {
-        
-    }
-    private void Update()
-    {
-        
-    }
+    public static bool IsPaused = true;
     public void Pause()
     {
         if (IsPaused)
