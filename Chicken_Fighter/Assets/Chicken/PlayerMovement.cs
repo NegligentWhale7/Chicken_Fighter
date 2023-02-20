@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform upPosition, downPosition;
     [SerializeField] private float speed, xDistance, yDistance;
     Rigidbody rb;
+    private bool isUp;
     private void OnEnable()
     {
         swipeListener.OnSwipe.AddListener(OnSwipe);
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         this.transform.position = upPosition.position;
+        isUp = true;
     }
     private void OnSwipe(string swipe)
     {
@@ -25,14 +27,16 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (this.transform.position == upPosition.position && swipe == "Down")
+        if (isUp && swipe == "Down")
         {
             this.transform.position = Vector3.Lerp(this.transform.position, downPosition.position, speed);
+            isUp = false;
             //Debug.Log("Bajan");
         }
-        else if (this.transform.position == downPosition.position && swipe == "Up") 
+        else if (!isUp && swipe == "Up") 
         {
             this.transform.position = Vector3.Lerp(this.transform.position, upPosition.position, speed);
+            isUp = true;
             //Debug.Log("Suben");
         }
         if (swipe == "Right")
@@ -43,8 +47,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
+        var lastPos = this.transform.position;
         Vector3 parabola = new Vector3(xDistance, yDistance, 0f);
         rb.AddForce(parabola, ForceMode.Impulse);
+        this.transform.position = lastPos;
     }
     private void OnDisable()
     {

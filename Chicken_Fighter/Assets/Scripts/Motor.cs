@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Motor : MonoBehaviour
 {
-    [SerializeField] float speed = 2.7f;
-    [SerializeField] Vector3 meta = new Vector3(-16 , 0, 0);    
+    [SerializeField] float speed = 2.7f, destiny = -16f;
+    //[SerializeField] Vector3 meta = new Vector3(-16 , 0, 0);    
     private void Update()
     {
         if (!GameManager.IsPaused)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, meta, speed * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(destiny, transform.position.y, transform.position.z), speed * Time.deltaTime);
         }
         
     }

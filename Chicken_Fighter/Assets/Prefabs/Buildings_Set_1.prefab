@@ -534,7 +534,7 @@ MeshCollider:
   m_GameObject: {fileID: 4222978289800470454}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.7
-  meta: {x: -16, y: 0, z: 0}
+  destiny: -16
 --- !u!65 &1494767765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MeshCollider:
   m_GameObject: {fileID: 4994352158653444835}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -813,7 +813,7 @@ MeshCollider:
   m_GameObject: {fileID: 7126832220068561406}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30

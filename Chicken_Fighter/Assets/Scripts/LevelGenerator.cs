@@ -8,8 +8,16 @@ public class LevelGenerator : MonoBehaviour
     [Header("Buildings")]
     [SerializeField] private List<GameObject> buildingSets = new List<GameObject>();
     [SerializeField] GameObject[] buildings;
-    [SerializeField] private int numberOfSets, waitingTime;
+    [SerializeField] private int numberOfSets;
+    [SerializeField] private float waitingTime;
     [SerializeField] private Transform buildingSpawnPosition;
+    [Header("Dangers")]
+    [SerializeField] private List<GameObject> enemiesList = new List<GameObject>();
+    [SerializeField] GameObject[] dangers;
+    [SerializeField] private int numberOfDangers;
+    [SerializeField] private float waitingDangerTime;
+    [SerializeField] private Transform dangerSpawnPos1, dangerSpawnPos2;
+
     private static LevelGenerator instance;
     public static LevelGenerator Instance { get { return instance; } }
     private void Awake()
@@ -25,34 +33,68 @@ public class LevelGenerator : MonoBehaviour
     }
     private void Start()
     {
-        AddScenariesToPool(numberOfSets);
+        AddObjectsToPool(buildingSets, buildings, numberOfSets);
+        AddObjectsToPool(enemiesList, dangers, numberOfDangers);
     }
     private void Update()
     { 
-        if (!GameManager.IsPaused) StartCoroutine(WaitForIt(waitingTime));
+        if (!GameManager.IsPaused) 
+        {
+            StartCoroutine(WaitForSpawnBuilding(waitingTime));
+            StartCoroutine(WaitForSpawnDangers(waitingDangerTime));
+        }
     }
-    private void AddScenariesToPool(int amount)
+    private void AddObjectsToPool(List<GameObject> objList, GameObject[] objsToPool, int amount)
     {
         for (int i = 0; i < amount; i++)
         {
-            int random = Random.Range(0, buildings.Length);
-            GameObject bSet = Instantiate(buildings[random]);
+            int random = Random.Range(0, objsToPool.Length);
+            GameObject bSet = Instantiate(objsToPool[random]);
             bSet.SetActive(false);
-            buildingSets.Add(bSet);
+            objList.Add(bSet);
             bSet.transform.parent = transform;
         }
     }    
-    private IEnumerator WaitForIt(float time)
+    private IEnumerator WaitForSpawnBuilding(float time)
     {
         for (int i = 0; i < buildingSets.Count; i++)
         {
             if (!buildingSets[i].activeSelf)
             {
-                yield return new WaitForSecondsRealtime(time);
                 buildingSets[i].transform.position = buildingSpawnPosition.position;
+                yield return new WaitForSecondsRealtime(time);
                 buildingSets[i].SetActive(true);
                 yield return buildingSets[i];
             }
+        }
+    }
+    private IEnumerator WaitForSpawnDangers(float time)
+    {
+        int randomPos;
+        for (int i = 0; i < enemiesList.Count; i++)
+        {
+            
+            if (!enemiesList[i].activeSelf)
+            {
+                randomPos = Random.Range(0, 2);
+                Debug.Log(randomPos);
+                if (randomPos == 0)
+                {
+                    enemiesList[i].transform.position = dangerSpawnPos1.position;  
+                    yield return new WaitForSecondsRealtime(time);
+                    enemiesList[i].SetActive(true);
+                    yield return enemiesList[i];
+                }
+                if (randomPos == 1)
+                {
+                    enemiesList[i].transform.position = dangerSpawnPos2.position;
+                    yield return new WaitForSecondsRealtime(time);
+                    enemiesList[i].SetActive(true);
+                    yield return enemiesList[i];  
+                }        
+            }
+            
+            
         }
     }
 }
