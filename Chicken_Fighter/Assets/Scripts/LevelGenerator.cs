@@ -43,6 +43,10 @@ public class LevelGenerator : MonoBehaviour
             StartCoroutine(WaitForSpawnBuilding(waitingTime));
             StartCoroutine(WaitForSpawnDangers(waitingDangerTime));
         }
+        if (GameManager.IsPaused)
+        {
+            StopAllCoroutines();
+        }
     }
     private void AddObjectsToPool(List<GameObject> objList, GameObject[] objsToPool, int amount)
     {
@@ -66,7 +70,15 @@ public class LevelGenerator : MonoBehaviour
                 buildingSets[i].SetActive(true);
                 yield return buildingSets[i];
             }
+            if (buildingSets[i].activeSelf)
+            {
+                yield return null;
+            }
         }
+
+        /*AddObjectsToPool(buildingSets, buildings, 1);
+        buildings[buildings.Length - 1].SetActive(true);
+        yield return buildings[buildings.Length - 1];*/
     }
     private IEnumerator WaitForSpawnDangers(float time)
     {
