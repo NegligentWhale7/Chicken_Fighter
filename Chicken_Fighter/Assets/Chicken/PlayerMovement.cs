@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GG.Infrastructure.Utils.Swipe;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private SwipeListener swipeListener;
-    [SerializeField] private Transform upPosition, downPosition;
-    [SerializeField] private float speed, xDistance, yDistance;
+    [SerializeField] private Transform upPosition, downPosition, rayCastOrigin;
+    [SerializeField] private float speed, rayCastMaxDistance, xDistance, yDistance;
+    [SerializeField] private LayerMask floorMask;
     Rigidbody rb;
-    private bool isUp;
+    private bool isUp, onFloor = false;
     private void OnEnable()
     {
         swipeListener.OnSwipe.AddListener(OnSwipe);
@@ -20,6 +22,13 @@ public class PlayerMovement : MonoBehaviour
         this.transform.position = upPosition.position;
         isUp = true;
     }
+    private void FixedUpdate()
+    {
+        if (IsGrounded())
+        {
+            ReturnToLastPosition();
+        }
+    }
     private void OnSwipe(string swipe)
     {
         //Debug.Log(swipe);
@@ -29,28 +38,46 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isUp && swipe == "Down")
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, downPosition.position, speed);
+            Vector3 downPos = new Vector3(this.transform.position.x, this.transform.position.y, downPosition.position.z);
+            this.transform.position = Vector3.Lerp(this.transform.position, downPos, speed);
             isUp = false;
             //Debug.Log("Bajan");
         }
         else if (!isUp && swipe == "Up") 
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, upPosition.position, speed);
+            Vector3 upPos = new Vector3(this.transform.position.x, this.transform.position.y, upPosition.position.z);
+            this.transform.position = Vector3.Lerp(this.transform.position, upPos, speed);
             isUp = true;
             //Debug.Log("Suben");
         }
         if (swipe == "Right")
         {
-            Debug.Log("Salta");
+            //Debug.Log("Salta");
             Jump();
+            
         }
     }
     private void Jump()
     {
-        var lastPos = this.transform.position;
         Vector3 parabola = new Vector3(xDistance, yDistance, 0f);
-        rb.AddForce(parabola, ForceMode.Impulse);
-        this.transform.position = lastPos;
+        if (IsGrounded())
+        {
+            rb.AddForce(parabola, ForceMode.Impulse);
+        }        
+    }
+    private bool IsGrounded()
+    {
+        onFloor = Physics.Raycast(rayCastOrigin.position, Vector3.down, rayCastMaxDistance, floorMask);
+        if (onFloor)        
+        {
+            Debug.DrawRay(rayCastOrigin.position, Vector3.down, Color.green, rayCastMaxDistance);
+        }       
+        return onFloor;
+    }
+    private void ReturnToLastPosition()
+    {
+        Vector3 lastPos = new Vector3(1.14f, transform.position.y, transform.position.z);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, 2f * Time.deltaTime);
     }
     private void OnDisable()
     {

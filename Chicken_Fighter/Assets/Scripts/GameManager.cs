@@ -5,6 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool IsPaused = true;
+    [SerializeField] UIManager uI;
+    private void Awake()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
     public void Pause()
     {
         if (IsPaused)
@@ -15,5 +20,9 @@ public class GameManager : MonoBehaviour
         {
             IsPaused= true;
         }
+    }
+    public void SaveScore()
+    {
+
     }
 }

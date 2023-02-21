@@ -77,7 +77,7 @@ public class LevelGenerator : MonoBehaviour
             if (!enemiesList[i].activeSelf)
             {
                 randomPos = Random.Range(0, 2);
-                Debug.Log(randomPos);
+                //Debug.Log(randomPos);
                 if (randomPos == 0)
                 {
                     enemiesList[i].transform.position = dangerSpawnPos1.position;  
