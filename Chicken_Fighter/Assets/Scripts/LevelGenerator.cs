@@ -18,6 +18,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float waitingDangerTime;
     [SerializeField] private Transform dangerSpawnPos1, dangerSpawnPos2;
 
+    [Header("Coins")]
+    [SerializeField] private List<GameObject> coinsList = new List<GameObject>();
+    [SerializeField] GameObject[] coins;
+    [SerializeField] private int numberOfCoins;
+    [SerializeField] private float waitingCoinTime;
+
     private static LevelGenerator instance;
     public static LevelGenerator Instance { get { return instance; } }
     private void Awake()
@@ -35,13 +41,16 @@ public class LevelGenerator : MonoBehaviour
     {
         AddObjectsToPool(buildingSets, buildings, numberOfSets);
         AddObjectsToPool(enemiesList, dangers, numberOfDangers);
+        AddObjectsToPool(coinsList, coins, numberOfCoins);
     }
     private void Update()
-    { 
+    {
+        //Timer(waitingTime);
         if (!GameManager.IsPaused) 
         {
-            StartCoroutine(WaitForSpawnBuilding(waitingTime));
+            //StartCoroutine(WaitForSpawnBuilding(waitingTime));
             StartCoroutine(WaitForSpawnDangers(waitingDangerTime));
+            StartCoroutine(WaitForSpawnCoins(waitingCoinTime));
         }
         if (GameManager.IsPaused)
         {
@@ -59,7 +68,7 @@ public class LevelGenerator : MonoBehaviour
             bSet.transform.parent = transform;
         }
     }    
-    private IEnumerator WaitForSpawnBuilding(float time)
+    /*private IEnumerator WaitForSpawnBuilding(float time)
     {
         for (int i = 0; i < buildingSets.Count; i++)
         {
@@ -68,7 +77,7 @@ public class LevelGenerator : MonoBehaviour
                 buildingSets[i].transform.position = buildingSpawnPosition.position;
                 yield return new WaitForSecondsRealtime(time);
                 buildingSets[i].SetActive(true);
-                yield return buildingSets[i];
+                //yield return buildingSets[i];
             }
             if (buildingSets[i].activeSelf)
             {
@@ -78,7 +87,37 @@ public class LevelGenerator : MonoBehaviour
 
         /*AddObjectsToPool(buildingSets, buildings, 1);
         buildings[buildings.Length - 1].SetActive(true);
-        yield return buildings[buildings.Length - 1];*/
+        yield return buildings[buildings.Length - 1];
+    }*/
+    private GameObject WaitForSpawnBuilding()
+    {
+        Timer(waitingTime);
+        for (int i = 0; i < buildingSets.Count; i++)
+        {
+            if (!buildingSets[i].activeSelf)
+            {
+                buildingSets[i].transform.position = buildingSpawnPosition.position;
+                buildingSets[i].SetActive(true);
+                return buildingSets[i];
+            }
+            return null;
+        }
+        return null;
+    }
+    private void Timer(float time)
+    {
+        float elapsedTime = 0;
+        elapsedTime += Time.deltaTime;
+        Debug.Log(elapsedTime);
+        /*if (elapsedTime < time)
+        {
+            elapsedTime += Time.time;
+            Debug.Log(elapsedTime);
+        }
+        if (elapsedTime > time)
+        {
+            elapsedTime = 0;
+        }*/
     }
     private IEnumerator WaitForSpawnDangers(float time)
     {
@@ -107,6 +146,35 @@ public class LevelGenerator : MonoBehaviour
             }
             
             
+        }
+    }
+    private IEnumerator WaitForSpawnCoins(float time)
+    {
+        int randomPos;
+        for (int i = 0; i < coinsList.Count; i++)
+        {
+
+            if (!coinsList[i].activeSelf)
+            {
+                randomPos = Random.Range(0, 2);
+                //Debug.Log(randomPos);
+                if (randomPos == 0)
+                {
+                    coinsList[i].transform.position = dangerSpawnPos1.position;
+                    yield return new WaitForSecondsRealtime(time);
+                    coinsList[i].SetActive(true);
+                    yield return coinsList[i];
+                }
+                if (randomPos == 1)
+                {
+                    coinsList[i].transform.position = dangerSpawnPos2.position;
+                    yield return new WaitForSecondsRealtime(time);
+                    coinsList[i].SetActive(true);
+                    yield return coinsList[i];
+                }
+            }
+
+
         }
     }
 }

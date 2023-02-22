@@ -24,6 +24,7 @@ public class PlayerEvents : MonoBehaviour
             Score score = other.GetComponent<Score>();
             score.CheckCoinValue();
             uI.AddScore(score.CheckCoinValue());
+            other.gameObject.SetActive(false);
         }
     }    
 
