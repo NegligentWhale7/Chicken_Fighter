@@ -1,26 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private void Update()
+    public static float currentTime = 0;
+    private static Timer instance;
+    public static Timer Instance { get { return instance; } }
+    private void Awake()
     {
-        Timering();
-    }
-    private void Timering()
-    {
-        float elapsedTime = 0;
-        elapsedTime += Time.deltaTime;
-        Debug.Log(elapsedTime);
-        /*if (elapsedTime < time)
+        if (instance == null)
         {
-            elapsedTime += Time.time;
-            Debug.Log(elapsedTime);
+            instance = this;
         }
-        if (elapsedTime > time)
+        else
         {
-            elapsedTime = 0;
-        }*/
+            Destroy(gameObject);
+        }
+    }
+
+    public static void CountUp(float time)
+    {        
+        //Debug.Log(currentTime.ToString());
+        if (currentTime < (time))
+        {
+            currentTime += Time.deltaTime;
+        }
+        if (currentTime > (time))
+        {
+            currentTime = 0;
+        }
     }
 }

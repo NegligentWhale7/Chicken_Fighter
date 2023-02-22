@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        scoreText.text = "";
+        scoreText.text = " 0";
         finishPanel.SetActive(false);
     }
     public void AddScore(int score)

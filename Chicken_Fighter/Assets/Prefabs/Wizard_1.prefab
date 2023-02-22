@@ -835,7 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
-  destiny: -16
+  destiny: -18
 --- !u!1 &4004998964881768653
 GameObject:
   m_ObjectHideFlags: 0

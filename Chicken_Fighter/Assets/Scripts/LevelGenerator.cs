@@ -42,6 +42,7 @@ public class LevelGenerator : MonoBehaviour
         AddObjectsToPool(buildingSets, buildings, numberOfSets);
         AddObjectsToPool(enemiesList, dangers, numberOfDangers);
         AddObjectsToPool(coinsList, coins, numberOfCoins);
+        
     }
     private void Update()
     {
@@ -49,6 +50,7 @@ public class LevelGenerator : MonoBehaviour
         if (!GameManager.IsPaused) 
         {
             //StartCoroutine(WaitForSpawnBuilding(waitingTime));
+            Timer.CountUp(waitingTime);
             StartCoroutine(WaitForSpawnDangers(waitingDangerTime));
             StartCoroutine(WaitForSpawnCoins(waitingCoinTime));
         }
@@ -89,9 +91,14 @@ public class LevelGenerator : MonoBehaviour
         buildings[buildings.Length - 1].SetActive(true);
         yield return buildings[buildings.Length - 1];
     }*/
-    private GameObject WaitForSpawnBuilding()
+    public GameObject WaitForSpawnBuilding()
     {
-        Timer(waitingTime);
+        /*bool waitDone = false;
+        if(Timer.currentTime >= (waitingTime -.006))
+        {
+            Debug.Log("Hola");
+            waitDone= true;
+        }*/
         for (int i = 0; i < buildingSets.Count; i++)
         {
             if (!buildingSets[i].activeSelf)
@@ -100,24 +107,9 @@ public class LevelGenerator : MonoBehaviour
                 buildingSets[i].SetActive(true);
                 return buildingSets[i];
             }
-            return null;
         }
         return null;
-    }
-    private void Timer(float time)
-    {
-        float elapsedTime = 0;
-        elapsedTime += Time.deltaTime;
-        Debug.Log(elapsedTime);
-        /*if (elapsedTime < time)
-        {
-            elapsedTime += Time.time;
-            Debug.Log(elapsedTime);
-        }
-        if (elapsedTime > time)
-        {
-            elapsedTime = 0;
-        }*/
+        
     }
     private IEnumerator WaitForSpawnDangers(float time)
     {

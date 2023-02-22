@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Motor : MonoBehaviour
 {
-    [SerializeField] float speed = 2.7f, destiny = -16f;
+    [SerializeField] float speed = 2.7f, destiny = -18f;
     //[SerializeField] Vector3 meta = new Vector3(-16 , 0, 0);    
     private void Update()
     {
