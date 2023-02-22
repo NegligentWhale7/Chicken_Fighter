@@ -6,9 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public static bool IsPaused = true;
     [SerializeField] UIManager uI;
+    [SerializeField] GameObject finishPanel;
     private void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
+    private void Update()
+    {
+        if(finishPanel.activeSelf)
+        {
+            IsPaused = true;
+        }
     }
     public void Pause()
     {

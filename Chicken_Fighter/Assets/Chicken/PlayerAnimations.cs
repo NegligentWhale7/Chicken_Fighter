@@ -35,7 +35,7 @@ public class PlayerAnimations : MonoBehaviour
                 playerAnimator.Play(walkAnim);
                if (GameManager.IsPaused)
                 {
-                    Debug.Log("Jugando");
+                    //Debug.Log("Jugando");
                     playerStates = PlayerStates.Paused;
                 }
                     break;

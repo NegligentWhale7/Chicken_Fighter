@@ -40,8 +40,8 @@ public class EnemyAnimations : MonoBehaviour
     {
         RaycastHit hit;
         isPlyrClose = Physics.Raycast(rayCastOrigin.position, transform.forward, out hit, rayMaxDistance, playerMask);
-        Debug.DrawRay(rayCastOrigin.position, transform.forward, Color.green);
-        if(hit.collider != null) Debug.Log(hit.collider.name);
+        //Debug.DrawRay(rayCastOrigin.position, transform.forward, Color.green);
+       // if(hit.collider != null) Debug.Log(hit.collider.name);
         return isPlyrClose;
     }
 }

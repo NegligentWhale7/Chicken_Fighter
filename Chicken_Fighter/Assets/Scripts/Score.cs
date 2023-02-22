@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
     [SerializeField] Coin coin;
     public int CheckCoinValue()
     {
-        Debug.Log(coin.CoinValue);
+        //Debug.Log(coin.CoinValue);
         return coin.CoinValue;
     }
 }

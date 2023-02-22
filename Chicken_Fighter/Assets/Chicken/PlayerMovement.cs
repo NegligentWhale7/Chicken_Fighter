@@ -68,15 +68,15 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         onFloor = Physics.Raycast(rayCastOrigin.position, Vector3.down, rayCastMaxDistance, floorMask);
-        if (onFloor)        
+        /*if (onFloor)        
         {
             Debug.DrawRay(rayCastOrigin.position, Vector3.down, Color.green, rayCastMaxDistance);
-        }       
+        }       */
         return onFloor;
     }
     private void ReturnToLastPosition()
     {
-        Vector3 lastPos = new Vector3(1.14f, transform.position.y, transform.position.z);
+        Vector3 lastPos = new Vector3(2.89f, transform.position.y, transform.position.z);
         this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, 2f * Time.deltaTime);
     }
     private void OnDisable()

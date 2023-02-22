@@ -67,7 +67,7 @@ public class LevelGenerator : MonoBehaviour
             GameObject bSet = Instantiate(objsToPool[random]);
             bSet.SetActive(false);
             objList.Add(bSet);
-            bSet.transform.parent = transform;
+            //bSet.transform.parent = transform;
         }
     }    
     /*private IEnumerator WaitForSpawnBuilding(float time)
