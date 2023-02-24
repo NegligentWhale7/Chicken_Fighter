@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour
     public static bool IsPaused = true;
     [SerializeField] UIManager uI;
     [SerializeField] GameObject finishPanel;
+    [SerializeField] int targetFrameRate;
     private void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Screen.SetResolution(1920, 1080, true, 60);
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFrameRate;
     }
     private void Update()
     {
