@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText, bestScoreText, finishText;
+    [SerializeField] private TextMeshProUGUI scoreText, bestScoreText, finishText, totalCoinsText;
     [SerializeField] GameObject finishPanel;
-    public int currentScore, finalScore, bestScore;
+    public int currentScore, finalScore, bestScore, totalCoins;
 
     private void Start()
     {
         scoreText.text = " 0";
         bestScoreText.text = "Best Score: " + bestScore;
+        totalCoinsText.text = "Total Coins: " + totalCoins;
         finishPanel.SetActive(false);
     }
     public void AddScore(int score)
@@ -35,5 +36,7 @@ public class UIManager : MonoBehaviour
         {
             bestScoreText.text = "Best Score: " + bestScore;
         }
+        totalCoins += finalScore;
+        totalCoinsText.text = "Total Coins: " + totalCoins;
     }
 }

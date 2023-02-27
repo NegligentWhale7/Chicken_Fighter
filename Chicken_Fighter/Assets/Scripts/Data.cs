@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Data
 {
-    public int BestScore, FinalScore, TotalCoins;
+    public int BestScore, TotalCoins;
 
-    public PlayerData(UIManager score)
+    public Data(UIManager score)
     {
-        FinalScore = UIManager.finalScore;
-        BestScore = UIManager.finalScore;
+        TotalCoins = score.totalCoins;
+        BestScore = score.finalScore;
     }
 }

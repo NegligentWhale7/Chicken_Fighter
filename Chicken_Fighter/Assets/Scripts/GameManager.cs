@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool IsPaused = true;
-    [SerializeField] UIManager uI;
+    [SerializeField] UIManager uiManager;
     [SerializeField] GameObject finishPanel;
     [SerializeField] int targetFrameRate;
     private void Awake()
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1920, 1080, true, 60);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFrameRate;
+        Loading();
     }
     private void Update()
     {
@@ -33,8 +34,14 @@ public class GameManager : MonoBehaviour
             IsPaused= true;
         }
     }
-    public void SaveScore()
+    public void SaveScore(UIManager scoreDt)
     {
-
+        SaveSystem.SaveData(scoreDt);
+    }
+    public void Loading()
+    {
+        Data plyrData = SaveSystem.LoadData();
+        uiManager.totalCoins = plyrData.TotalCoins;
+        uiManager.bestScore = plyrData.BestScore;
     }
 }
