@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     public static bool IsPaused = true;
     [SerializeField] UIManager uiManager;
     [SerializeField] GameObject finishPanel;
     [SerializeField] int targetFrameRate;
+    [SerializeField] UnityEvent gameStart, gameOver;
     private void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;

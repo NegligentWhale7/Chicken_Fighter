@@ -19,7 +19,12 @@ public static class SaveSystem
     public static Data LoadData()
     {
         string path = Application.persistentDataPath + "/player.fun";
-        if(File.Exists(path))
+        if (!File.Exists(path))
+        {
+            //Debug.LogError("Save file was not found in " + path);
+            return null;
+        }
+        if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
@@ -28,11 +33,7 @@ public static class SaveSystem
             stream.Close();
             return pData;
         }
-        else if (!File.Exists(path))
-        {
-            Debug.LogError("Save file was not found in " + path);
-            return null;
-        }
+        
         return null;
     } 
 }
