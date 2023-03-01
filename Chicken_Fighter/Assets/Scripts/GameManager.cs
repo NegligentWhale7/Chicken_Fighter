@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
-    public static bool IsPaused = true;
+    public static bool IsPaused = false;
     [SerializeField] UIManager uiManager;
     [SerializeField] GameObject finishPanel;
     [SerializeField] int targetFrameRate;
@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
         if(finishPanel.activeSelf)
         {
             IsPaused = true;
+        }
+        else
+        {
+            IsPaused = false;
         }
     }
     public void Pause()
