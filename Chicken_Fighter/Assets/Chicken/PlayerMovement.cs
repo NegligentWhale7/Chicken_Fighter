@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())
         {
             rb.AddForce(parabola, ForceMode.Impulse);
+          //rb.velocity += parabola;
         }        
     }
     private bool IsGrounded()

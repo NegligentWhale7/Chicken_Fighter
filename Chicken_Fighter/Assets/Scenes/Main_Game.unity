@@ -2581,7 +2581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1602220986}
   finishPanel: {fileID: 648245886}
-  targetFrameRate: 0
+  targetFrameRate: 60
   gameStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2623,8 +2623,8 @@ MonoBehaviour:
   OnSwipe:
     m_PersistentCalls:
       m_Calls: []
-  _sensetivity: 15
-  _continuousDetection: 0
+  _sensetivity: 20
+  _continuousDetection: 1
   _swipeDetectionMode: 2
 --- !u!114 &1602220986
 MonoBehaviour:
@@ -4086,8 +4086,8 @@ MonoBehaviour:
   rayCastOrigin: {fileID: 724724781}
   speed: 1.5
   rayCastMaxDistance: 0.2
-  xDistance: 2
-  yDistance: 3
+  xDistance: 1.5
+  yDistance: 1.7
   floorMask:
     serializedVersion: 2
     m_Bits: 64

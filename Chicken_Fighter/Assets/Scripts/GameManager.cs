@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        Screen.SetResolution(1920, 1080, true, 60);
+        //Screen.SetResolution(1920, 1080, true, 60);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFrameRate;
         Loading();
