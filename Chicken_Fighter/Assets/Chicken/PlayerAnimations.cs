@@ -24,7 +24,7 @@ public class PlayerAnimations : MonoBehaviour
         switch (playerStates)
         {
             case PlayerStates.Paused:
-                playerAnimator.Play(idleAnim);
+                //playerAnimator.Play(idleAnim);
                 if (!GameManager.IsPaused)
                 {
                     //Debug.Log("Pausa");

@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
-    public static bool IsPaused = false;
+    public static bool IsPaused = true;
     [SerializeField] UIManager uiManager;
     [SerializeField] GameObject finishPanel;
     [SerializeField] int targetFrameRate;
     [SerializeField] UnityEvent gameStart, gameOver;
     private void Awake()
     {
+        //IsPaused = true;
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         //Screen.SetResolution(1920, 1080, true, 60);
         QualitySettings.vSyncCount = 0;
@@ -19,13 +20,10 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(IsPaused);
         if(finishPanel.activeSelf)
         {
             IsPaused = true;
-        }
-        else
-        {
-            IsPaused = false;
         }
     }
     public void Pause()

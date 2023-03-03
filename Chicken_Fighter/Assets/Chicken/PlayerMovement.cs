@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     private void ReturnToLastPosition()
     {
         Vector3 lastPos = new Vector3(3.39f, transform.position.y, transform.position.z);
-        this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, 2f * Time.deltaTime);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, 4f * Time.deltaTime);
     }
     private void OnDisable()
     {
