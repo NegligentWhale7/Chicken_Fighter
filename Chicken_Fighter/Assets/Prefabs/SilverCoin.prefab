@@ -180,3 +180,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 11400000, guid: 8aa74a57bb947e543b7b859fe4f6ae67, type: 2}
+  coinVFX: {fileID: 0}
